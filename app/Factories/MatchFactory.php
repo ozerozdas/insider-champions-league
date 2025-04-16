@@ -3,10 +3,11 @@
 namespace App\Factories;
 
 use App\Models\TeamMatch;
+use Illuminate\Support\Collection;
 
 class MatchFactory
 {
-    public static function createFixture(array $teams): void
+    public static function createFixture(Collection $teams): void
     {
         TeamMatch::truncate();
         $totalTeams = count($teams);

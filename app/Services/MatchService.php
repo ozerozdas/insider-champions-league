@@ -9,11 +9,15 @@ use Illuminate\Support\Collection;
 
 class MatchService
 {
+    public static function getTeams(): Collection
+    {
+        return Team::get();
+    }
+
     public static function createFixture(): bool
     {
         try {
-            $teams = Team::get()->toArray();
-            MatchFactory::createFixture($teams);
+            MatchFactory::createFixture(self::getTeams());
             return true;
         } catch (\Exception $e) {
             return false;

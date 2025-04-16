@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Head, router } from '@inertiajs/react';
-import { useToast } from "@/hooks/use-toast";
-import { Button } from "@/Components/ui/button";
 import { Loader2 } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
 import Layout from '@/Layouts/Layout';
+import { Button } from "@/Components/ui/button";
+import { Progress } from '@/Components/ui/progress';
 
-export default function Welcome({ appName }: { appName: string }) {
+export default function Welcome({ teams }: { teams: any }) {
     const [loading, setLoading] = useState(false);
     const { toast } = useToast();
 
@@ -31,11 +32,22 @@ export default function Welcome({ appName }: { appName: string }) {
         <Layout>
             <Head title="Homepage" />
 
-            <div className="bg-white p-10 rounded-xl shadow-xl text-center space-y-6 w-full max-w-md mx-auto">
+            <div className="bg-white p-10 rounded-xl shadow-xl text-center space-y-6 w-full max-w-xl mx-auto">
+
                 <h1 className="text-3xl font-bold">
-                    Welcome to <br />
-                    <span>{appName}</span>
+                    Tournament Teams
                 </h1>
+                <div className="grid grid-cols-2 gap-4">
+                    {
+                        teams.map((team: any) => (
+                            <div key={team.id} className="grid place-items-center bg-gray-100 p-4 rounded-lg shadow">
+                                <span className="text-lg font-semibold">{team.name}</span>
+                                <Progress value={team.strength} className="w-full mt-2" />
+                            </div>
+                        ))
+                    }
+                </div>
+
                 <Button className="w-full" onClick={handleStartSimulation} disabled={loading}>
                     {
                         loading ? (
