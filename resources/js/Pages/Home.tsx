@@ -1,7 +1,18 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { Button } from "@/Components/ui/button";
 
 export default function Welcome({ appName }: { appName: string }) {
+    const handleStartSimulation = () => {
+        router.post(route('simulation.start'), {}, {
+            onSuccess: () => {
+                router.get(route('simulation.dashboard'));
+            },
+            onError: (error) => {
+                console.error('Error starting simulation:', error);
+            },
+        });
+    };
+
     return (
         <>
             <Head title="Homepage" />
@@ -12,10 +23,8 @@ export default function Welcome({ appName }: { appName: string }) {
                         Welcome to <br />
                         <span>{appName}</span>
                     </h1>
-                    <Button className="w-full" asChild>
-                        <Link href={"/Simulation"}>
-                            Go to Simulation
-                        </Link>
+                    <Button className="w-full" onClick={handleStartSimulation}>
+                        Go to Simulation
                     </Button>
                 </div>
             </div >
