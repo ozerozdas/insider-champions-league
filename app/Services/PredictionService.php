@@ -9,24 +9,27 @@ class PredictionService
 {
     public static function getOdds()
     {
-        $matches = TeamMatch::unplayed()->get();
-        $teams = Team::with(['homeMatches', 'awayMatches'])->get();
+        return cache()->remember('odds', now()->addDays(1), function () {
+            $matches = TeamMatch::unplayed()->get();
+            $teams = Team::with(['homeMatches', 'awayMatches'])->get();
 
-        $odds = self::calculateOddsWithWeights($teams, $matches);
-        $odds = $odds->sortByDesc(fn($v, $k) => $v)->map(fn($v, $k) => [
-            'id' => $k,
-            'name' => Team::find($k)->name,
-            'odds' => $v,
-        ]);
-        $odds = $odds->values()->all();
-        $odds = collect($odds)->sortByDesc('odds')->map(function ($item) {
-            return [
-                'id' => $item['id'],
-                'name' => $item['name'],
-                'odds' => $item['odds'],
-            ];
+            $odds = self::calculateOddsWithWeights($teams, $matches);
+            $odds = $odds->sortByDesc(fn($v, $k) => $v)->map(fn($v, $k) => [
+                'id' => $k,
+                'name' => Team::find($k)->name,
+                'odds' => $v,
+            ]);
+            $odds = $odds->values()->all();
+            $odds = collect($odds)->sortByDesc('odds')->map(function ($item) {
+                return [
+                    'id' => $item['id'],
+                    'name' => $item['name'],
+                    'odds' => $item['odds'],
+                ];
+            });
+
+            return $odds;
         });
-        return $odds;
     }
 
     private static function calculateOddsWithWeights($teams, $matches, $simCount = 1000)
