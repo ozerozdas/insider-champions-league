@@ -31,7 +31,7 @@ export default function Welcome({ appName }: { appName: string }) {
         <Layout>
             <Head title="Homepage" />
 
-            <div className="bg-white p-10 rounded-xl shadow-xl text-center space-y-6 w-full max-w-md">
+            <div className="bg-white p-10 rounded-xl shadow-xl text-center space-y-6 w-full max-w-md mx-auto">
                 <h1 className="text-3xl font-bold">
                     Welcome to <br />
                     <span>{appName}</span>

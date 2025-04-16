@@ -4,9 +4,8 @@ import { Badge } from "@/Components/ui/badge";
 
 export default function LeagueTable({ standings }) {
     return (
-        <Card className="w-full max-w-4xl mx-auto mt-8 shadow-xl bg-white dark:bg-gray-800">
+        <Card className="w-full mx-auto mt-8 shadow-xl bg-white dark:bg-gray-800">
             <CardContent className="p-6">
-                <h2 className="text-2xl font-bold mb-4">League Standings</h2>
                 <Table>
                     <TableHeader>
                         <TableRow>

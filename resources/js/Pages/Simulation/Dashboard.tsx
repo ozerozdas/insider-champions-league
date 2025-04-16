@@ -8,23 +8,28 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/Components/ui/tabs"
+import ChampionshipOddsTable from '@/Components/ChampionshipOddsTable';
 
-export default function Welcome({ standings, fixture }: { standings: Array<any>, fixture: Array<any> }) {
+export default function Welcome({ standings, fixture, predictions }: { standings: Array<any>, fixture: Array<any>, predictions: Array<any> }) {
     return (
         <Layout>
             <Head title="Dashboard" />
 
             <div className="container mx-auto max-w-7xl px-4 py-8 min-h-[calc(50vh)]">
                 <Tabs defaultValue="standings">
-                    <TabsList className="grid w-full grid-cols-2">
+                    <TabsList className="grid w-full grid-cols-3">
                         <TabsTrigger value="standings">Standings</TabsTrigger>
                         <TabsTrigger value="fixture">Fixture</TabsTrigger>
+                        <TabsTrigger value="predictions">Championship Predictions</TabsTrigger>
                     </TabsList>
                     <TabsContent value="standings">
                         <LeagueTable standings={standings} />
                     </TabsContent>
                     <TabsContent value="fixture">
                         <FixtureTable matches={fixture} />
+                    </TabsContent>
+                    <TabsContent value="predictions">
+                        <ChampionshipOddsTable odds={predictions} />
                     </TabsContent>
                 </Tabs>
             </div>
