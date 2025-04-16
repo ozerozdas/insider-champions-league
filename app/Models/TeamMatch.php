@@ -24,6 +24,15 @@ class TeamMatch extends Model
         'is_played' => 'boolean',
     ];
 
+    protected $appends = [
+        'name',
+    ];
+
+    public function getNameAttribute()
+    {
+        return $this->homeTeam->name . ' vs ' . $this->awayTeam->name;
+    }
+
     public function homeTeam()
     {
         return $this->belongsTo(Team::class, 'home_team_id');

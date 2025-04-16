@@ -6,7 +6,11 @@ export default function Layout({ children }: PropsWithChildren) {
     return (
         <>
             <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
-                {children}
+                <ApplicationLogo />
+
+                <div className='mt-6 w-full'>
+                    {children}
+                </div>
             </div>
 
             <Toaster />

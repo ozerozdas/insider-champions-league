@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Factories\MatchFactory;
 use App\Models\Team;
 use App\Models\TeamMatch;
+use Illuminate\Support\Collection;
 
 class MatchService
 {
@@ -19,8 +20,8 @@ class MatchService
         }
     }
 
-    public static function getFixture(): array
+    public static function getFixture(): Collection
     {
-        return TeamMatch::get()->toArray();
+        return TeamMatch::get();
     }
 }
