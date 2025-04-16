@@ -15,7 +15,6 @@ class MatchService
             MatchFactory::createFixture($teams);
             return true;
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return false;
         }
     }

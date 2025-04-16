@@ -9,10 +9,11 @@ class SimulationController extends Controller
 {
     public function start()
     {
+        sleep(1);
         $status = MatchService::createFixture();
-        return redirect()->route('simulation.dashboard')->with([
-            'message' => $status ? 'Fixture created successfully' : 'Failed to create fixture',
-        ], $status ? 200 : 500);
+        return $status
+            ? redirect()->route('simulation.dashboard')
+            : back()->withErrors('Failed to create fixture.');
     }
 
     public function index()
