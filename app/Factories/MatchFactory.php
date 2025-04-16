@@ -3,6 +3,7 @@
 namespace App\Factories;
 
 use App\Models\TeamMatch;
+use App\Services\PredictionService;
 use Illuminate\Support\Collection;
 
 class MatchFactory
@@ -10,6 +11,7 @@ class MatchFactory
     public static function createFixture(Collection $teams): void
     {
         TeamMatch::truncate();
+        PredictionService::forgetOdds();
         $totalTeams = count($teams);
         $totalWeeks = $totalTeams - 1;
         $matchesPerWeek = $totalTeams / 2;

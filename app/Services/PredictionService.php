@@ -116,4 +116,9 @@ class PredictionService
 
         return collect($table)->sortByDesc('points');
     }
+
+    public static function forgetOdds(): void
+    {
+        cache()->forget('odds');
+    }
 }
