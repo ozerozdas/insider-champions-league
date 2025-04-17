@@ -6,7 +6,12 @@ import { Progress } from "@/Components/ui/progress";
 import { getChampionshipPredictions } from "@/Services/api";
 
 export default function ChampionshipOddsTable() {
-    const [odds, setOdds] = useState([]);
+    interface TeamOdds {
+        name: string;
+        odds: number;
+    }
+
+    const [odds, setOdds] = useState<TeamOdds[]>([]);
     const [loading, setLoading] = useState(false);
 
     const fetchOdds = async () => {
@@ -23,7 +28,7 @@ export default function ChampionshipOddsTable() {
 
     useEffect(() => {
         fetchOdds();
-        
+
         eventBus.on('refreshData', () => fetchOdds());
     }, []);
 

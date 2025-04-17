@@ -6,7 +6,19 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/Components/ui/badge";
 
 export default function LeagueTable() {
-    const [standings, setStandings] = useState([]);
+    interface Team {
+        team: string;
+        played: number;
+        won: number;
+        drawn: number;
+        lost: number;
+        gf: number;
+        ga: number;
+        gd: number;
+        points: number;
+    }
+
+    const [standings, setStandings] = useState<Team[]>([]);
     const [loading, setLoading] = useState(false);
 
     const fetchStandings = async () => {
