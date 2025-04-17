@@ -11,7 +11,7 @@ import {
 import ChampionshipOddsTable from '@/Components/ChampionshipOddsTable';
 import PlayMatch from '@/Components/PlayMatch';
 
-export default function Welcome({ standings, fixture, predictions }: { standings: Array<any>, fixture: Array<any>, predictions: Array<any> }) {
+export default function Welcome() {
     return (
         <Layout>
             <Head title="Dashboard" />
@@ -24,13 +24,13 @@ export default function Welcome({ standings, fixture, predictions }: { standings
                         <TabsTrigger value="predictions">Championship Predictions</TabsTrigger>
                     </TabsList>
                     <TabsContent value="standings">
-                        <LeagueTable standings={standings} />
+                        <LeagueTable />
                     </TabsContent>
                     <TabsContent value="fixture">
-                        <FixtureTable matches={fixture} />
+                        <FixtureTable />
                     </TabsContent>
                     <TabsContent value="predictions">
-                        <ChampionshipOddsTable odds={predictions} />
+                        <ChampionshipOddsTable />
                     </TabsContent>
                 </Tabs>
 
