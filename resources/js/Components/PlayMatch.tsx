@@ -6,8 +6,11 @@ import { useState } from 'react';
 
 export default function PlayMatch({ isLeagueCompleted }: { isLeagueCompleted: boolean }) {
     const [leagueCompleted, setLeagueCompleted] = useState(isLeagueCompleted);
+    const [loading, setLoading] = useState(false);
     const { toast } = useToast();
+
     const handlePlayAll = async () => {
+        setLoading(true);
         try {
             const response = await playAllWeeks();
             toast({
@@ -25,10 +28,13 @@ export default function PlayMatch({ isLeagueCompleted }: { isLeagueCompleted: bo
                 duration: 5000
             });
             console.error("Error simulating all weeks:", e);
+        } finally {
+            setLoading(false);
         }
     };
 
     const handlePlayNext = async () => {
+        setLoading(true);
         try {
             const response = await playNextWeek();
             toast({
@@ -46,10 +52,13 @@ export default function PlayMatch({ isLeagueCompleted }: { isLeagueCompleted: bo
                 duration: 5000
             });
             console.error("Error simulating next week:", e);
+        } finally {
+            setLoading(false);
         }
     };
 
     const handleReset = async () => {
+        setLoading(true);
         try {
             await resetLeague();
             toast({
@@ -67,14 +76,16 @@ export default function PlayMatch({ isLeagueCompleted }: { isLeagueCompleted: bo
                 duration: 5000
             });
             console.error("Error resetting league data:", e);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 p-4 rounded-lg bg-gray-200/40'>
-            <Button className='w-full' variant="default" onClick={handlePlayAll} disabled={leagueCompleted}>Play All Weeks</Button>
-            <Button className='w-full' variant="default" onClick={handlePlayNext} disabled={leagueCompleted}>Play Next Week</Button>
-            <Button className='w-full' variant="destructive" onClick={handleReset}>Reset Data</Button>
+            <Button className='w-full' variant="default" onClick={handlePlayAll} disabled={leagueCompleted || loading}>Play All Weeks</Button>
+            <Button className='w-full' variant="default" onClick={handlePlayNext} disabled={leagueCompleted || loading}>Play Next Week</Button>
+            <Button className='w-full' variant="destructive" onClick={handleReset} disabled={loading}>Reset Data</Button>
         </div>
     )
 }
