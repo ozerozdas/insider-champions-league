@@ -1,0 +1,50 @@
+name: App Testing
+
+on:
+  push:
+    branches: *
+  pull_request:
+    branches: *
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: [ '8.4' ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          tools: composer, pest, php-cs-fixer
+
+      - name: Run PHP Code Sniffer
+        run: |
+          ./vendor/bin/phpcs
+
+      - name: Validate composer.json and lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Copy .env
+        run: cp .env.example .env
+
+      - name: Generate app key
+        run: php artisan key:generate
+
+      - name: Run migrations (SQLite in-memory)
+        run: |
+          php artisan config:clear
+          php artisan migrate --env=testing --database=sqlite --force
+
+      - name: Run Pest tests
+        run: ./vendor/bin/pest

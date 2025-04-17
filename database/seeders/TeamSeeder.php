@@ -13,6 +13,7 @@ class TeamSeeder extends Seeder
      */
     public function run(): void
     {
+        Team::truncate();
         $teams = [
             ['name' => 'Arsenal', 'strength' => 85],
             ['name' => 'Fulham', 'strength' => 50],
