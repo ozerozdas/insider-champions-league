@@ -9,6 +9,7 @@ import {
     TabsTrigger,
 } from "@/Components/ui/tabs"
 import ChampionshipOddsTable from '@/Components/ChampionshipOddsTable';
+import PlayMatch from '@/Components/PlayMatch';
 
 export default function Welcome({ standings, fixture, predictions }: { standings: Array<any>, fixture: Array<any>, predictions: Array<any> }) {
     return (
@@ -32,6 +33,8 @@ export default function Welcome({ standings, fixture, predictions }: { standings
                         <ChampionshipOddsTable odds={predictions} />
                     </TabsContent>
                 </Tabs>
+
+                <PlayMatch />
             </div>
         </Layout>
     );

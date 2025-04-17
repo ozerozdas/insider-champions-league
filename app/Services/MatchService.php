@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Factories\MatchFactory;
 use App\Models\Team;
 use App\Models\TeamMatch;
+use App\Strategies\MatchResultStrategyInterface;
+use App\Strategies\WeightedMatchResultStrategy;
 use Illuminate\Support\Collection;
 
 class MatchService
@@ -47,5 +49,23 @@ class MatchService
         } else {
             return ['home_score' => rand(0, 2), 'away_score' => rand(0, 2)];
         }
+    }
+
+    public static function simulateMatch(TeamMatch $match, ?MatchResultStrategyInterface $strategy = null): void
+    {
+        $strategy = $strategy ?? new WeightedMatchResultStrategy();
+
+        $home = $match->homeTeam;
+        $away = $match->awayTeam;
+
+        $result = $strategy->simulate($home, $away);
+        
+        $match->update([
+            'home_score' => $result['home_score'],
+            'away_score' => $result['away_score'],
+            'is_played' => true,
+        ]);
+
+        PredictionService::forgetOdds();
     }
 }

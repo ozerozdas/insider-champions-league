@@ -20,7 +20,7 @@ class LeagueTableService
             $ga = 0;
 
             foreach ($team->homeMatches as $match) {
-                if (!$match->is_simulated) {
+                if (!$match->is_played) {
                     continue;
                 }
 
@@ -38,7 +38,7 @@ class LeagueTableService
             }
 
             foreach ($team->awayMatches as $match) {
-                if (!$match->is_simulated) {
+                if (!$match->is_played) {
                     continue;
                 }
 
@@ -70,6 +70,7 @@ class LeagueTableService
             ];
         });
 
-        return $table->sortByDesc('points');
+        return $table->sortByDesc('points')
+            ->values();
     }
 }

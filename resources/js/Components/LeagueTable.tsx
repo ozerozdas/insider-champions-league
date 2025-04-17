@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/Components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
 import { Badge } from "@/Components/ui/badge";
 
-export default function LeagueTable({ standings }) {
+export default function LeagueTable({ standings }: { standings: Array<any> }) {
     return (
         <Card className="w-full mx-auto mt-8 shadow-xl bg-white dark:bg-gray-800">
             <CardContent className="p-6">
