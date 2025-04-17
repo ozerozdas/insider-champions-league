@@ -22,7 +22,7 @@ class SimulationController extends Controller
     {
         $standings = LeagueTableService::getTable();
         $fixture = MatchService::getFixture();
-        $predictions = PredictionService::getOdds();
+        $predictions = new PredictionService()->getOdds();
         return Inertia::render('Simulation/Dashboard', [
             'standings' => $standings,
             'fixture' => $fixture,
