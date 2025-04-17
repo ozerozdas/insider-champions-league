@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\MatchService;
+use App\Services\PredictionService;
 use Inertia\Inertia;
 
 class SimulationController extends Controller
@@ -18,6 +19,7 @@ class SimulationController extends Controller
 
     public function index()
     {
+        // dd((new PredictionService())->getOdds());
         return Inertia::render('Simulation/Dashboard', [
             'isLeagueCompleted' => MatchService::isLeagueCompleted(),
         ]);
