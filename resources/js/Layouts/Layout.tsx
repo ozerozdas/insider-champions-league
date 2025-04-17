@@ -5,7 +5,7 @@ import { PropsWithChildren } from 'react';
 export default function Layout({ children }: PropsWithChildren) {
     return (
         <>
-            <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
+            <div className='flex flex-col items-center md:justify-center h-screen bg-gray-100'>
                 <ApplicationLogo />
 
                 <div className='mt-6 w-full'>

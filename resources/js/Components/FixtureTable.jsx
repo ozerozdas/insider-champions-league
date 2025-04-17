@@ -12,7 +12,7 @@ export default function FixtureTable({ matches }) {
     const sortedWeeks = Object.keys(groupedMatches).sort((a, b) => Number(a) - Number(b));
 
     return (
-        <div className="grid grid-cols-2 gap-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
             {
                 sortedWeeks.map((week) => (
                     <Card className="w-full mx-auto shadow-xl">

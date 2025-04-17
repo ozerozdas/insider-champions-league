@@ -6,7 +6,6 @@ export default function ChampionshipOddsTable({ odds }: { odds: Array<{ name: st
     return (
         <Card className="w-full mx-auto mt-8 shadow-xl">
             <CardContent className="p-6">
-                <h2 className="text-2xl font-bold mb-4">Championship Predictions</h2>
                 <Table>
                     <TableHeader>
                         <TableRow>

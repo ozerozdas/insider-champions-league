@@ -29,7 +29,7 @@ class MatchService
         return TeamMatch::get();
     }
 
-    public static function weightedScore(Team $home, Team $away)
+    public static function weightedScore(Team $home, Team $away): array
     {
         $homePower = $home->strength + ($home->points * 2) + ($home->goal_diff ?? 0);
         $awayPower = $away->strength + ($away->points * 2) + ($away->goal_diff ?? 0);
