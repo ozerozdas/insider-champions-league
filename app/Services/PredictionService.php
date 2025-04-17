@@ -11,7 +11,6 @@ class PredictionService
 {
     public function getOdds()
     {
-        self::forgetOdds();
         $strategy = match (config('league.prediction.strategy')) {
             'random' => new RandomPredictionStrategy(),
             'weighted' => new WeightedPredictionStrategy(),
