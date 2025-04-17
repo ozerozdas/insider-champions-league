@@ -59,7 +59,7 @@ class MatchService
         $away = $match->awayTeam;
 
         $result = $strategy->simulate($home, $away);
-        
+
         $match->update([
             'home_score' => $result['home_score'],
             'away_score' => $result['away_score'],
