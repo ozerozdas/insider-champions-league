@@ -18,6 +18,8 @@ class SimulationController extends Controller
 
     public function index()
     {
-        return Inertia::render('Simulation/Dashboard');
+        return Inertia::render('Simulation/Dashboard', [
+            'isLeagueCompleted' => MatchService::isLeagueCompleted(),
+        ]);
     }
 }

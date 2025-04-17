@@ -11,7 +11,7 @@ import {
 import ChampionshipOddsTable from '@/Components/ChampionshipOddsTable';
 import PlayMatch from '@/Components/PlayMatch';
 
-export default function Welcome() {
+export default function Welcome({ isLeagueCompleted }: { isLeagueCompleted: boolean }) {
     return (
         <Layout>
             <Head title="Dashboard" />
@@ -34,7 +34,7 @@ export default function Welcome() {
                     </TabsContent>
                 </Tabs>
 
-                <PlayMatch />
+                <PlayMatch isLeagueCompleted={isLeagueCompleted} />
             </div>
         </Layout>
     );

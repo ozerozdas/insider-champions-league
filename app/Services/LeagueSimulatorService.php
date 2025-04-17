@@ -44,6 +44,7 @@ class LeagueSimulatorService
                 'away_score' => null,
                 'is_played' => false,
             ]);
+            PredictionService::forgetOdds();
             return true;
         } catch (\Exception $e) {
             return false;

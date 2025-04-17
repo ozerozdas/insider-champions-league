@@ -16,6 +16,11 @@ class MatchService
         return Team::get();
     }
 
+    public static function isLeagueCompleted(): bool
+    {
+        return TeamMatch::where('is_played', false)->count() === 0;
+    }
+
     public static function createFixture(): bool
     {
         try {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use App\Services\LeagueSimulatorService;
+use App\Services\MatchService;
 
 class SimulationController extends Controller
 {
@@ -13,6 +14,7 @@ class SimulationController extends Controller
         $status = (new LeagueSimulatorService())->simulateAllMatches();
         return response()->json([
             'message' => $status ? 'All matches simulated' : 'Failed to simulate matches',
+            'isLeagueCompleted' => MatchService::isLeagueCompleted(),
         ], $status ? 200 : 500);
     }
 
@@ -21,6 +23,7 @@ class SimulationController extends Controller
         $status = (new LeagueSimulatorService())->simulateNextWeek();
         return response()->json([
             'message' => $status ? 'Next week simulated' : 'Failed to simulate matches',
+            'isLeagueCompleted' => MatchService::isLeagueCompleted(),
         ], $status ? 200 : 500);
     }
 

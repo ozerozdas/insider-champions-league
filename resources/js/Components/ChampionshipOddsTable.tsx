@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
+import eventBus from '@/eventBus';
 import { Card, CardContent } from "@/Components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
 import { Progress } from "@/Components/ui/progress";
-import { useEffect, useState } from "react";
 import { getChampionshipPredictions } from "@/Services/api";
 
 export default function ChampionshipOddsTable() {
@@ -22,6 +23,8 @@ export default function ChampionshipOddsTable() {
 
     useEffect(() => {
         fetchOdds();
+        
+        eventBus.on('refreshData', () => fetchOdds());
     }, []);
 
     return (

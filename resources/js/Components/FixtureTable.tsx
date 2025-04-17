@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
+import eventBus from '@/eventBus';
+import { getFixture } from "@/Services/api";
 import { Card, CardContent } from "@/Components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
 import { Badge } from "@/Components/ui/badge";
-import { useEffect, useState } from "react";
-import { getFixture } from "@/Services/api";
 
 export default function FixtureTable() {
     const [matches, setMatches] = useState([]);
@@ -22,6 +23,8 @@ export default function FixtureTable() {
 
     useEffect(() => {
         fetchFixture();
+
+        eventBus.on('refreshData', () => fetchFixture());
     }, []);
 
     const groupedMatches = matches.reduce((acc: any, match: any) => {

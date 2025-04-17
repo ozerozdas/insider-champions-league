@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
+import eventBus from '@/eventBus';
+import { getStandings } from "@/Services/api";
 import { Card, CardContent } from "@/Components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
 import { Badge } from "@/Components/ui/badge";
-import { useEffect, useState } from "react";
-import { getStandings } from "@/Services/api";
 
 export default function LeagueTable() {
     const [standings, setStandings] = useState([]);
@@ -22,6 +23,8 @@ export default function LeagueTable() {
 
     useEffect(() => {
         fetchStandings();
+
+        eventBus.on('refreshData', () => fetchStandings());
     }, []);
 
     return (
