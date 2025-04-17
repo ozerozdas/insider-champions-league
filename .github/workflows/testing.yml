@@ -25,7 +25,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           coverage: none
-          tools: composer, pest, php-cs-fixer
+          tools: composer, pest, phpcs
 
       - name: Run PHP Code Sniffer
         run: |
