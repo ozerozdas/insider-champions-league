@@ -2,9 +2,11 @@ name: App Testing
 
 on:
   push:
-    branches: *
+    branches:
+      - "*"
   pull_request:
-    branches: *
+    branches:
+      - "*"
 
 jobs:
   laravel-tests:
