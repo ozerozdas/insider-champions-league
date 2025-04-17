@@ -11,7 +11,7 @@ This is a Laravel project for Insider Champions League. You can change result st
 ## Installation
 
 ```bash
-git clone https://github.com/mehmetozerozdas/insider-champions-league.git
+git clone https://github.com/ozerozdas/insider-champions-league.git
 cd insider-champions-league
 cp .env.example .env
 composer install
