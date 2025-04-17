@@ -20,27 +20,39 @@ class LeagueTableService
             $ga = 0;
 
             foreach ($team->homeMatches as $match) {
-                if (!$match->is_simulated) continue;
+                if (!$match->is_simulated) {
+                    continue;
+                }
 
                 $played++;
                 $gf += $match->home_score;
                 $ga += $match->away_score;
 
-                if ($match->home_score > $match->away_score) $won++;
-                elseif ($match->home_score == $match->away_score) $drawn++;
-                else $lost++;
+                if ($match->home_score > $match->away_score) {
+                    $won++;
+                } elseif ($match->home_score == $match->away_score) {
+                    $drawn++;
+                } else {
+                    $lost++;
+                }
             }
 
             foreach ($team->awayMatches as $match) {
-                if (!$match->is_simulated) continue;
+                if (!$match->is_simulated) {
+                    continue;
+                }
 
                 $played++;
                 $gf += $match->away_score;
                 $ga += $match->home_score;
 
-                if ($match->away_score > $match->home_score) $won++;
-                elseif ($match->away_score == $match->home_score) $drawn++;
-                else $lost++;
+                if ($match->away_score > $match->home_score) {
+                    $won++;
+                } elseif ($match->away_score == $match->home_score) {
+                    $drawn++;
+                } else {
+                    $lost++;
+                }
             }
 
             $points = $won * 3 + $drawn;
