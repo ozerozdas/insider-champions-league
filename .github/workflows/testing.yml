@@ -25,11 +25,10 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           coverage: none
-          tools: composer, pest, phpcs
+          tools: composer, phpcs
 
       - name: Run PHP Code Sniffer
-        run: |
-          ./vendor/bin/phpcs
+        run: phpcs
 
       - name: Validate composer.json and lock
         run: composer validate
